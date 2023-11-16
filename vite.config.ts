@@ -9,6 +9,9 @@ import UnoCSS from 'unocss/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
+import { unheadComposablesImports } from 'unhead'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   resolve: {
@@ -29,38 +32,47 @@ export default defineConfig({
         }),
       },
     }),
-
     // https://github.com/posva/unplugin-vue-router
     VueRouter(),
-
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: [
         'vue',
+        'vue-i18n',
         '@vueuse/core',
         VueRouterAutoImports,
+        unheadComposablesImports[0],
         {
           // add any other imports you were relying on
           'vue-router/auto': ['useLink'],
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar',
+          ],
         },
       ],
       dts: true,
       dirs: [
         './src/composables',
+        './src/stores',
       ],
       vueTemplate: true,
     }),
-
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
+      resolvers: [NaiveUiResolver()],
     }),
-
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
     UnoCSS(),
+    // https://vue-i18n.intlify.dev
+    VueI18n({
+      include: [path.resolve(__dirname, 'locales/**')],
+    }),
   ],
-
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',

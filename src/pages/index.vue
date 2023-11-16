@@ -4,7 +4,7 @@ defineOptions({
 })
 
 const name = ref('')
-
+const { t } = useI18n()
 const router = useRouter()
 function go() {
   if (name.value)
@@ -17,11 +17,11 @@ function go() {
     <div i-carbon-campsite inline-block text-4xl />
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
-        Vitesse Lite
+        {{ t('app.title.index') }}
       </a>
     </p>
     <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
+      <em text-sm op75>{{ t('intro.desc') }} </em>
     </p>
 
     <div py-4 />
@@ -44,3 +44,10 @@ function go() {
     </div>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  title: 帅哥
+  description: Vite Starter Template
+  requiresAuth: false
+</route>

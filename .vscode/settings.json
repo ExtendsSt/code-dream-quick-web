@@ -46,12 +46,15 @@
     "yaml"
   ],
   "cSpell.words": [
+    "Destructurable",
     "iconify",
+    "intlify",
     "pinia",
     "taze",
     "unhead",
     "unocss",
     "unplugin",
+    "Vite",
     "vueuse"
   ]
 }

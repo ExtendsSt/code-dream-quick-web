@@ -3,7 +3,9 @@
   "private": true,
   "packageManager": "pnpm@8.10.3",
   "scripts": {
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
+    "build:dev": "vue-tsc && vite build --mode development",
+    "build:test": "vue-tsc && vite build --mode test",
     "dev": "vite --port 3333 --open",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
@@ -13,6 +15,7 @@
     "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
+    "@intlify/unplugin-vue-i18n": "^1.5.0",
     "@unhead/vue": "^1.8.4",
     "@vueuse/core": "^10.6.0",
     "axios": "^1.6.2",
@@ -35,6 +38,8 @@
     "eslint-define-config": "^1.24.1",
     "jsdom": "^22.1.0",
     "lint-staged": "^15.1.0",
+    "mockjs": "^1.1.0",
+    "naive-ui": "^2.35.0",
     "pnpm": "^8.10.3",
     "simple-git-hooks": "^2.9.0",
     "taze": "^0.12.0",
