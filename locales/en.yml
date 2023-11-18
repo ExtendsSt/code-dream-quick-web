@@ -1,5 +1,6 @@
 app:
   description: A platform created by Code Dream Technology for rapid development projects
+  locale: En
   title:
     home: Home
     index: Code Dream Rapid Development Platform
@@ -17,4 +18,13 @@ intro:
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
   whats-your-name: What's your name?
+login:
+  app_name: Code Dream Rapid Development Platform
+  login: Login
+  passwordinput:
+    label: 'Password:'
+    placeholder: Please enter the password
+  userinput:
+    label: 'Username:'
+    placeholder: Please enter user name
 not-found: Not found

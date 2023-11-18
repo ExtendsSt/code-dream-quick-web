@@ -1,6 +1,19 @@
+<script setup lang="ts">
+import { darkTheme } from 'naive-ui'
+
+const router = useRouter()
+watchEffect(() => {
+  const title = router.currentRoute.value.meta.title as string ?? ''
+  useHead({
+    title: `${title === '' ? '' : t(title)} | ${t('app.title.index')}`,
+  })
+})
+</script>
+
 <template>
-  <main font-sans p="x-4 y-10" text="center gray-700 dark:gray-200">
-    <RouterView />
-    <TheFooter />
-  </main>
+  <n-config-provider :theme="isDark ? darkTheme : null">
+    <AppProvider>
+      <RouterView />
+    </AppProvider>
+  </n-config-provider>
 </template>

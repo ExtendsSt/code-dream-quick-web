@@ -1,15 +1,22 @@
 import { createApp } from 'vue'
-import type { VueApp } from './types'
 import App from './App.vue'
-
+import { installAll } from '~/modules'
+import 'virtual:svg-icons-register'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
-import 'uno.css'
+import 'vfonts/Lato.css'
+import 'vfonts/FiraCode.css'
+
+// https://www.naiveui.com/zh-CN/os-theme/docs/style-conflict
+const meta = document.createElement('meta')
+meta.name = 'naive-ui-style'
+document.head.appendChild(meta)
+
+// 最后导入uno.css
+import('uno.css')
 
 const app = createApp(App)
-
-// install all modules under `modules/`
-Object.values(import.meta.glob<{ install: VueApp }>('./modules/*.ts', { eager: true }))
-  .forEach(i => i.install?.(app))
+// 挂载所有模块
+installAll(app)
 
 app.mount('#app')

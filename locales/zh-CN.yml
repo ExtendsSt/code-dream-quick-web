@@ -1,9 +1,10 @@
 app:
   description: 码梦科技制作的用于快速开发项目的平台
+  locale: 中
   title:
+    home: 首页
     index: 码梦快速开发平台
     login: 登录
-    home: 首页
 button:
   about: 关于
   back: 返回
@@ -17,4 +18,14 @@ intro:
   dynamic-route: 动态路由演示
   hi: 你好，{name}
   whats-your-name: 输入你的名字
+login:
+  app_name: 码梦快速开发平台
+  login: 登录
+  passwordinput:
+    # eslint-disable-next-line no-irregular-whitespace
+    label: '密　码:'
+    placeholder: 请输入密码
+  userinput:
+    label: '用户名:'
+    placeholder: 请输入用户名
 not-found: 未找到页面

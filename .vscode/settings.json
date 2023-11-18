@@ -2,6 +2,10 @@
   "files.associations": {
     "*.css": "postcss"
   },
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.localesPaths": "locales",
+  "i18n-ally.sortKeys": true,
 
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
@@ -28,6 +32,13 @@
     { "rule": "*quotes", "severity": "off" },
     { "rule": "*semi", "severity": "off" }
   ],
+
+  // unocss
+  "editor.quickSuggestions": {
+    "strings": true,
+    "other": true,
+    "comments": true
+  },
 
   // The following is optional.
   // It's better to put under project setting `.vscode/settings.json`

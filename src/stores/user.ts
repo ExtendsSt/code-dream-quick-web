@@ -23,11 +23,19 @@ export const useUserStore = defineStore('user', () => {
 
     savedName.value = name
   }
+  function userLogin() {
+    isLoggedIn.value = true
+  }
+  function userLogout() {
+    isLoggedIn.value = false
+  }
 
   return {
-    setNewName,
     otherNames,
     savedName,
     isLoggedIn,
+    userLogin,
+    userLogout,
+    setNewName,
   }
 })

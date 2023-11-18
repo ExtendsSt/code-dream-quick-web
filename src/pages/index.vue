@@ -3,12 +3,13 @@ defineOptions({
   name: 'IndexPage',
 })
 
-const name = ref('')
 const { t } = useI18n()
+const { userLogout } = useUserStore()
 const router = useRouter()
+
 function go() {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
+  userLogout()
+  router.push('/login')
 }
 </script>
 
@@ -23,20 +24,10 @@ function go() {
     <p>
       <em text-sm op75>{{ t('intro.desc') }} </em>
     </p>
-
     <div py-4 />
-
-    <TheInput
-      v-model="name"
-      placeholder="What's your name?"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-
     <div>
       <button
         class="m-3 text-sm btn"
-        :disabled="!name"
         @click="go"
       >
         Go
@@ -45,9 +36,10 @@ function go() {
   </div>
 </template>
 
-<route lang="yaml">
-meta:
-  title: 帅哥
-  description: Vite Starter Template
-  requiresAuth: false
+<route lang="json">
+{
+  "meta": {
+    "title": "app.title.home"
+  }
+}
 </route>
