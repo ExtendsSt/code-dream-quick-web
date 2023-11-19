@@ -52,7 +52,7 @@ function login() {
             </n-button>
           </n-gi>
           <n-gi class="mt-4 flex justify-between text-6" span="24">
-            <button icon-btn @click="toggleDark()">
+            <button icon-btn @click="toggleDark">
               <div i-carbon-sun dark:i-carbon-moon />
             </button>
             <button icon-btn :class="[isZh ? '' : 'rotate-180']" @click="toggleLocales()">
