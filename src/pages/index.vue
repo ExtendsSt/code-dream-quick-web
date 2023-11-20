@@ -4,11 +4,12 @@ defineOptions({
 })
 
 const { t } = useI18n()
-const { userLogout } = useUserStore()
+const { userLogout, token } = useUserStore()
 const router = useRouter()
 
 function go() {
   userLogout()
+  console.log(token)
   router.push('/login')
 }
 </script>

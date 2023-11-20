@@ -15,10 +15,10 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      pc: '#18a058', // class="text-very-cool"
-      pch: '#36ad6a', // class="text-very-cool"
-      pcp: '#0c7a43', // class="text-very-cool"
-      pcs: '#36ad6a', // class="text-very-cool"
+      pc: '#18a058',
+      pch: '#36ad6a',
+      pcp: '#0c7a43',
+      pcs: '#36ad6a',
     },
   },
   presets: [

@@ -7,8 +7,6 @@ Mock.mock(/\/test/, 'get', () => {
 
 const { data, isFinished } = useFetch('/test')
 
-console.log(data.value)
-
 watch(isFinished, () => {
   if (isFinished)
     console.log(data.value)

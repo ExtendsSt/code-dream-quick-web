@@ -11,6 +11,9 @@ dependencies:
   '@unhead/vue':
     specifier: ^1.8.4
     version: registry.npmmirror.com/@unhead/vue@1.8.4(vue@3.3.8)
+  '@vicons/antd':
+    specifier: ^0.12.0
+    version: registry.npmmirror.com/@vicons/antd@0.12.0
   '@vueuse/core':
     specifier: ^10.6.0
     version: 10.6.0(vue@3.3.8)
@@ -5986,6 +5989,12 @@ packages:
       hookable: registry.npmmirror.com/hookable@5.5.3
       unhead: registry.npmmirror.com/unhead@1.8.4
       vue: 3.3.8(typescript@5.2.2)
+    dev: false
+
+  registry.npmmirror.com/@vicons/antd@0.12.0:
+    resolution: {integrity: sha512-C0p6aO1EmGG1QHrqgUWQS1No20934OdWSRQshM5NIDK5H1On6tC26U0hT6Rmp40KfUsvhvX5YW8BoWJdNFifPg==, tarball: https://registry.npmmirror.com/@vicons/antd/-/antd-0.12.0.tgz}
+    name: '@vicons/antd'
+    version: 0.12.0
     dev: false
 
   registry.npmmirror.com/@vue-macros/common@1.8.0(vue@3.3.8):

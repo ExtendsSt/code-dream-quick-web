@@ -13,7 +13,8 @@
     "types": [
       "vite/client",
       "unplugin-vue-macros/macros-global",
-      "vite-plugin-vue-meta-layouts/client"
+      "vite-plugin-vue-meta-layouts/client",
+      "naive-ui/volar"
     ],
     "allowJs": true,
     "strict": true,

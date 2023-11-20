@@ -12,12 +12,17 @@ const rules = ref({
   username: {},
   password: {},
 })
-const { userLogin } = useUserStore()
+const { userLogin, setToken } = useUserStore()
 const router = useRouter()
 
 function login() {
-  userLogin()
-  router.push('/')
+  const { isFinished } = userLogin()
+  watch(isFinished, () => {
+    if (isFinished) {
+      setToken('123')
+      router.push('/')
+    }
+  })
 }
 </script>
 
@@ -67,7 +72,7 @@ function login() {
 
 <route lang="yaml">
 meta:
+  skip_auth: true
   layout: login
   title: app.title.home
-  no_login: true
 </route>

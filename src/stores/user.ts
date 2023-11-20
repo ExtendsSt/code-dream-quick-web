@@ -1,41 +1,39 @@
 import { defineStore } from 'pinia'
+import { StorageEnum } from '~/enums/storageEnum'
+import { storage } from '~/utils/Storage'
+import { test } from '~/apis/user'
 
+interface UserState {
+  username: string
+  avatar: string
+  permissions: string[]
+}
 export const useUserStore = defineStore('user', () => {
-  /**
-   * Current name of the user.
-   */
-  const savedName = ref('')
-  const isLoggedIn = ref<boolean>(false)
-  const previousNames = ref(new Set<string>())
+  const token = ref('')
+  const userInfo = reactive<UserState>({
+    username: '',
+    avatar: '',
+    permissions: [],
+  })
 
-  const usedNames = computed(() => Array.from(previousNames.value))
-  const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
-
-  /**
-   * Changes the current name of the user and saves the one that was used
-   * before.
-   *
-   * @param name - new name to set
-   */
-  function setNewName(name: string) {
-    if (savedName.value)
-      previousNames.value.add(savedName.value)
-
-    savedName.value = name
+  function setToken(newVal: string) {
+    storage.set(StorageEnum.ACCESS_TOKEN, newVal)
+    token.value = newVal
   }
+
   function userLogin() {
-    isLoggedIn.value = true
+    return test()
   }
+
   function userLogout() {
-    isLoggedIn.value = false
+    storage.remove(StorageEnum.ACCESS_TOKEN)
   }
 
   return {
-    otherNames,
-    savedName,
-    isLoggedIn,
+    token,
+    userInfo,
+    setToken,
     userLogin,
     userLogout,
-    setNewName,
   }
 })
