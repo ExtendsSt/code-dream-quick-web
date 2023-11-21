@@ -1,15 +1,10 @@
 <script setup lang="ts">
-const menu = {
-  icon: 'logo',
-}
 </script>
 
 <template>
   <div h-screen w-screen flex justify-between>
     <div class="hidden h-full basis-1/2 flex-col items-center justify-center bg-yellow md:flex space-y-10 dark:bg-opacity-0">
-      <svg class="h-100 w-100 dark:fill-#ffffff" aria-hidden="true">
-        <use :href="`#icon-${menu.icon}`" />
-      </svg>
+      <div class="i-my-icon-logo h-100 w-100 dark:fill-#ffffff" />
       <h1 select-none text-7xl>
         {{ t('login.app_name') }}
       </h1>

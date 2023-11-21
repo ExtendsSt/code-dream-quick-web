@@ -22,10 +22,6 @@ router.beforeEach(async (_to, _from, _next) => {
   const { token } = useUserStore()
   const { isDynamicRouteAdded, setDynamicRouteAdded } = useAsyncRouteStore()
   const skip_auth = _to.meta.skip_auth
-
-  console.log('token', !!token)
-  console.log('skip_auth', !!skip_auth)
-
   if (!token) {
     if (skip_auth) {
       _next()
@@ -46,7 +42,6 @@ router.beforeEach(async (_to, _from, _next) => {
   const redirectPath = (_from.query.redirect || _to.path) as string
   const redirect = decodeURIComponent(redirectPath)
   const nextData = _to.path === redirect ? { ..._to, replace: true } : { path: redirect }
-  console.log('nextData', nextData)
   setDynamicRouteAdded(true)
   _next(nextData)
   Loading && Loading.finish()

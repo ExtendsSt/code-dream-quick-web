@@ -1,122 +1,67 @@
 <script setup lang="ts">
-const collapsed = ref<boolean>(false)
-const fixedMulti = ref<boolean>(false)
-const isMultiTabs = ref<boolean>(false)
-const leftMenuWidth = computed(() => {
-  return collapsed.value ? 64 : 200
+import { storeToRefs } from 'pinia'
+
+const themeStore = useThemeStore()
+const { mobileWidth, menuWidth, minMenuWidth, setIsMobile } = useThemeStore()
+const { menuMode, isMobile, tabsFixed, tabsShow, headerFixed, menuFixed } = storeToRefs(themeStore)
+const menuCollapsed = ref<boolean>(false)
+const leftMenuWidth = computed(() => menuCollapsed.value ? minMenuWidth : menuWidth)
+const showSideDrawer = computed({
+  get: () => isMobile.value && menuCollapsed.value,
+  set: val => (menuCollapsed.value = val),
+})
+// 判断是否触发移动端模式
+function watchWidth() {
+  setIsMobile(document.body.clientWidth <= mobileWidth)
+  menuCollapsed.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('resize', watchWidth)
+  watchWidth()
 })
 </script>
 
 <template>
-  <n-layout position="absolute" has-sider>
+  <n-layout position="absolute" has-sider class="bg-#000000">
     <n-layout-sider
+      v-if="!isMobile && (menuMode === 'vertical' || menuMode === 'horizontal-mix')"
       show-trigger="bar"
-      position="absolute"
-      :collapsed="collapsed"
+      :collapsed="menuCollapsed"
       collapse-mode="width"
       :collapsed-width="64"
       :width="leftMenuWidth"
       :native-scrollbar="false"
       :inverted="isDark"
-      class="layout-sider"
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      class="relative z-13 h-screen shadow transition-all duration-200 ease-in-out"
+      @collapse="menuCollapsed = true"
+      @expand="menuCollapsed = false"
     >
-      <Logo :collapsed="collapsed" />
-      <AsideMenu v-model:collapsed="collapsed" location="left" />
+      <Logo :collapsed="menuCollapsed" />
+      <AsideMenu v-model:collapsed="menuCollapsed" location="left" />
     </n-layout-sider>
-    <n-layout :inverted="isDark">
-      <!-- <n-layout-header :inverted="getHeaderInverted" :position="fixedHeader">
-        <PageHeader v-model:collapsed="collapsed" :inverted="inverted" />
-      </n-layout-header> -->
-      <n-layout-content class="layout-content" :class="{ 'layout-default-background': isDark === false }">
-        <div class="layout-content-main" :class="{ 'layout-content-main-fix': fixedMulti }">
-          <!-- <TabsView v-model:collapsed="collapsed" /> -->
-          <div :class="{ 'main-view-fix': fixedMulti, 'noMultiTabs': !isMultiTabs, 'mt-3': !isMultiTabs }" class="main-view">
-            <MainView />
+    <n-drawer v-model:show="showSideDrawer" :width="menuWidth" placement="left" class="bg-#001428">
+      <n-layout-sider :position="menuFixed ? 'absolute' : 'static'" :collapsed="false" :width="menuWidth" :native-scrollbar="false" :inverted="isDark" class="layout-sider">
+        <Logo :collapsed="false" />
+        <AsideMenu />
+      </n-layout-sider>
+    </n-drawer>
+    <n-layout class="bg-gray-800" :inverted="isDark">
+      <n-layout-header class="z-11" :inverted="isDark" :position="headerFixed ? 'absolute' : 'static'">
+        <PageHeader v-model:collapsed="menuCollapsed" :inverted="isDark" />
+      </n-layout-header>
+      <div class="relative">
+        <n-layout-content position="absolute" class="min-h-100vh flex-auto" :native-scrollbar="false">
+          <div class="mx-10px mb-10px mt-0" :class="{ 'pt-16': tabsFixed, 'pt-0': !headerFixed }">
+            <TabsView v-if="tabsShow" v-model:collapsed="menuCollapsed" />
+            <div :class="{ 'mt-44px': tabsFixed, 'noMultiTabs': !tabsShow, 'mt-3': !tabsShow }">
+              <MainView />
+            </div>
           </div>
-        </div>
-      </n-layout-content>
-      <n-back-top :right="100" />
+        </n-layout-content>
+      </div>
+      <n-back-top :visibility-height="30" class=":right-50% z-100 bg-gray-100" :right="100" />
+      <div>test</div>
     </n-layout>
   </n-layout>
 </template>
-
-<style>
-.layout-side-drawer {
-  background-color: rgb(0, 20, 40);
-}
-.layout-sider {
-  min-height: 100vh;
-  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
-  position: relative;
-  z-index: 13;
-  transition: all 0.2s ease-in-out;
-}
-</style>
-
-<style scoped>
-.layout {
-  display: flex;
-  flex-direction: row;
-  flex: auto;
-}
-.layout-default-background {
-  background: #f5f7f9;
-}
-.layout-sider {
-  min-height: 100vh;
-  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
-  position: relative;
-  z-index: 13;
-  transition: all 0.2s ease-in-out;
-}
-
-.layout-sider-fix {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.ant-layout {
-  overflow: hidden;
-}
-.layout-right-fix {
-  overflow-x: hidden;
-  padding-left: 200px;
-  min-height: 100vh;
-  transition: all 0.2s ease-in-out;
-}
-.layout-content {
-  flex: auto;
-  min-height: 100vh;
-}
-.n-layout-header.n-layout-header--absolute-positioned {
-  z-index: 11;
-}
-.n-layout-footer {
-  background: none;
-}
-
-.layout-content-main {
-  margin: 0 10px 10px;
-  position: relative;
-  padding-top: 64px;
-}
-
-.layout-content-main-fix {
-  padding-top: 64px;
-}
-
-.fluid-header {
-  padding-top: 0;
-}
-
-.main-view-fix {
-  padding-top: 44px;
-}
-
-.noMultiTabs {
-  padding-top: 0;
-}
-</style>

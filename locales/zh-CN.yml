@@ -5,6 +5,7 @@ app:
     home: 首页
     index: 码梦快速开发平台
     login: 登录
+    short: 码梦
 button:
   about: 关于
   back: 返回
@@ -29,3 +30,8 @@ login:
     label: '用户名:'
     placeholder: 请输入用户名
 not-found: 未找到页面
+page:
+  test:
+    title: 测试页面
+  user:
+    title: 用户管理

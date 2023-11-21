@@ -31,7 +31,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     token,
-    userInfo,
+    ...toRefs(userInfo),
     setToken,
     userLogin,
     userLogout,

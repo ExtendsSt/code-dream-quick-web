@@ -3,11 +3,11 @@
 </script>
 
 <template>
-  <div>user</div>
+  <div>test</div>
 </template>
 
 <route lang="yaml">
 meta:
-  title: page.user.title
-  icon: i-carbon-user-profile
+  title: page.test.title
+  icon: i-ant-design:dashboard-outlined
 </route>

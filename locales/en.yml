@@ -5,6 +5,7 @@ app:
     home: Home
     index: Code Dream Rapid Development Platform
     login: Login
+    sort: CodeDream
 button:
   about: About
   back: Back
@@ -28,3 +29,8 @@ login:
     label: 'Username:'
     placeholder: Please enter user name
 not-found: Not found
+page:
+  test:
+    title: TestPages
+  user:
+    title: UserSetting

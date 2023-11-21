@@ -13,7 +13,6 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import { unheadComposablesImports } from 'unhead'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import MetaLayouts from 'vite-plugin-vue-meta-layouts'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig({
   resolve: {
@@ -75,12 +74,6 @@ export default defineConfig({
     // https://vue-i18n.intlify.dev
     VueI18n({
       include: [path.resolve(__dirname, 'locales/**')],
-    }),
-    createSvgIconsPlugin({
-      // 配置图标路径
-      iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
-      // 图标id
-      symbolId: 'icon-[dir]-[name]',
     }),
   ],
   // https://github.com/vitest-dev/vitest
